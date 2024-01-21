@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Your JSX code here
+     // Header Component
+const Header = () => {
+  return <h1>This is the Header</h1>;
+};
+
+// Footer Component
+const Footer = (props) => {
+  return <p>This is the Footer. Received data: {props.data}</p>;
+};
+
+// Content Component
+const Content = () => {
+  return (
+    <div>
+      <p>This is the main content area.</p>
+      <Footer data="Data from Content" />
+    </div>
+  );
+};
+
+// App Component 
+const App = () => {
+  return (
+    <div>
+      <Header />
+      <Content />
+    </div>
+  );
+};
+
+// JSX code after Babel transpilation
+const jsxCodeAfterBabel = `
+const Header = () => {
+  return React.createElement('h1', null, 'This is the Header');
+};
+
+const Footer = (props) => {
+  return React.createElement('p', null, 'This is the Footer. Received data: ', props.data);
+};
+
+const Content = () => {
+  return React.createElement('div', null,
+    React.createElement('p', null, 'This is the main content area.'),
+    React.createElement(Footer, { data: 'Data from Content' })
+  );
+};
+
+const App = () => {
+  return React.createElement('div', null,
+    React.createElement(Header, null),
+    React.createElement(Content, null)
+  );
+};
+
+ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
+`
+ReactDOM.render(<App />, document.getElementById('root'));
+
+
+  </script>
+</body>
+</html>
